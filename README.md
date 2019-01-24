@@ -1,6 +1,6 @@
 # HPR-Trajectory-Code
 
-    functions.py:
+    functions.py
 
   Calculations.one_stage calculates the motor delay (coast time), max velocity and peak altitude of a one stage rocket.
   This uses equations from: http://www.rocketmime.com/rockets/qref.html
