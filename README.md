@@ -18,7 +18,7 @@
    Fill in the Area and empty mass parameters of the stages.
    Also fill in the engine data if using different engines.
    
-   Engine data currently in file
+   Engine data currently in file:
    
    1st stage motor: CESARONI - P38-4G WHITE THUNDER (I470).
    Link: https://www.apogeerockets.com/Rocket_Motors/Cesaroni_Propellant_Kits/Cesaroni_Certification_Special/38mm_Certification_Propellants/Cesaroni_P38-4G_White_Thunder_I470#faqs
