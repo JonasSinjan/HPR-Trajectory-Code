@@ -3,7 +3,7 @@ import scipy.integrate as spi
 import scipy as sp
 
 rho = 1.22  # kg/m^3
-A = 0.005 # m^2 ------------must set this - unknown
+A = 0.01 # m^2 ------------must set this - unknown
 Cd = 0.75
 g = 9.8  # m/s^2
 
@@ -31,16 +31,17 @@ mass_coast = mr + me - mp
 I_2 = 658  # Ns - impulse
 T_max_2 = 512.3  # Newton - max thrust
 t_2 = 1.9  # burn time
-#M_2 = 2  # kg - wet mass of second stage
-mr = 1.5 #empty mass (no motor)
-me = 2 #loaded mass
-mp = 0.337  #propellant mass - kg
-M_2 = mr + me - mp/2
+T_avg_2 = t_2 * I_2
+mr = 0.8  # empty mass (no motor)
+me = mr + mp  # loaded mass
+mp = 0.337  # propellant mass - kg
+mass_2_boost = mr + me - mp / 2
+mass_2_coast = mr + me - mp
 
 class Calculations:
 
     @staticmethod
-    def height(mass_boost, mass_coast, t, T):
+    def one_stage_height(mass_boost, mass_coast, t, T):
         # mass_boost = mass during boost
         # mass_coast = mass during coast
         # T - motor thrust in Newtons
@@ -69,5 +70,5 @@ class Calculations:
         pass
 
 
-t_a, height = Calculations.height(mass_boost, mass_coast, t_1, T_avg)
+t_a, height = Calculations.one_stage_height(mass_boost, mass_coast, t_1, T_avg)
 print(t_a, height)
