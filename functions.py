@@ -54,15 +54,15 @@ class Calculations:
 
         # second stage
         v_0 = v  # set new velocity to old velocity
-        m = mass_boost - mr_1 - me_2 - mp_1 - mp_2 / 2
+        m = mr_2 + me_2 - mp_2 / 2
 
-        q = np.sqrt((T[1] - m * g) / k)
+        q_new = np.sqrt((T[1] - m * g) / k)
 
-        x = 2 * k * q / m
+        x_new = 2 * k * q_new / m
 
-        s = (q + v_0) / (q - v_0)
+        s = (q_new + v_0) / (q_new - v_0)
 
-        v = q * (s - np.exp(-x * t[1])) / (s + np.exp(-x * t[1]))
+        v = q_new * ((s - np.exp(-x_new * t[1])) / (s + np.exp(-x_new * t[1])))
 
         y_2 = -m / (2 * k) * np.log((T[1] - m * g - k * v ** 2) / (T[1] - m * g - k * v_0 ** 2))
 
