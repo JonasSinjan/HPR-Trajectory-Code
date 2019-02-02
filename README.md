@@ -4,14 +4,11 @@
 
       Calculations.one_stage calculates the motor delay (coast time), max velocity and peak altitude of a one stage rocket.
       This uses equations from: http://www.rocketmime.com/rockets/qref.html
-      The validity of these equations are not confirmed.
+      These equations make an estimate for the average mass during the burn.  For a thorough analysis a dynamic (changing) mass must be considered, this requires Numerical methods since it cannot be solved analytically.
     
       Calculations.two_stage calculates the motor delay (coast time), max velocity and peak altitude of a two stage rocket.
       This uses equations from: http://www.rocketmime.com/rockets/multistg.html
-      The validity of these equations are not confirmed.
-      
-      Calculations.ODEints not completed atm.
-      Will complete a numerical intregation using forward Euler like that described in http://web.mit.edu/16.unified/www/FALL/systems/Lab_Notes/traj.pdf
+      These equations make an estimate for the average mass during the burn.  For a thorough analysis a dynamic (changing) mass must be considered, this requires Numerical methods since it cannot be solved analytically.
 
    data_run.py
     
