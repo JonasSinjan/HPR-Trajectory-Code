@@ -44,8 +44,10 @@ mp_2 = 0.337  # propellant mass (kg)
 t = [t_1, t_2]
 T = [T_avg_1, T_avg_2]
 
-t_a, v, height = Calculations.two_stage_height(mr_1, me_1, mp_1, mr_2, me_2, mp_2, t, T, g, k)
+t_a, v, v_0, height = Calculations.two_stage_height(mr_1, me_1, mp_1, mr_2, me_2, mp_2, t, T, g, k)
 print("Two stage rocket")
 print(f"The calculated coast time is {t_a} s")
 print(f"The max velocity is {v} m/s")
+print(f"The dv after the first stage is {v_0} m/s")
 print(f"The peak altitude is {height} m")
+

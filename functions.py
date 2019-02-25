@@ -77,7 +77,8 @@ class Calculations:
 
         t_a = np.arctan(v / q_a) / q_b  # coasting time (motor delay)
 
-        return t_a, v, y_1 + y_2 + y_c
+
+        return t_a, v, v_0, y_1 + y_2 + y_c
 
     @staticmethod
     def ODEints():
