@@ -1,4 +1,11 @@
 # HPR-Trajectory-Code
+    
+    odersolver.py
+
+  The governing set of ordinary differential equations, taking into account a v^2 drag and gravity, are solved numerically
+  using scipy.integrate.solve_ivp (initial value problem), using the RK45 method.  Just run odesolver.py and the graphs
+  will be generated including the max velocity and height.  A parachute opening on descent is not included in the simulation.
+
 
     functions.py
 
@@ -24,6 +31,7 @@
    Link: https://www.apogeerockets.com/Rocket_Motors/Cesaroni_Propellant_Kits/38mm_Motors/5-Grain_Motors/Cesaroni_P38-5G_Blue_Streak_J357
    
    Once all data filled in, just run: data_run.py.
+   
   
    
    

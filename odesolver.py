@@ -83,8 +83,8 @@ sol3 = spi.solve_ivp(stage2, (ct, ct + t2_end), z2, t_eval=t3, max_step=0.001)
 # Final Coast
 z3 = [sol3.y[0, -1], sol3.y[1, -1], sol3.y[2, -1]]
 cstart = ct + t2_end
-t4 = np.linspace(cstart, cstart + 45, 1000)
-sol4 = spi.solve_ivp(coast, (cstart, cstart + 45), z3, t_eval=t4, max_step=0.001)
+t4 = np.linspace(cstart, cstart + 17, 1000)
+sol4 = spi.solve_ivp(coast, (cstart, cstart + 17), z3, t_eval=t4, max_step=0.001)
 
 time = np.concatenate((sol.t, sol2.t, sol3.t, sol4.t))
 
