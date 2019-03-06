@@ -2,6 +2,7 @@
     
     odersolver.py
 
+  The system: a two-stage rocket, using the motors described at the bottom, for only vertical flight.
   The governing set of ordinary differential equations, taking into account a v^2 drag and gravity, are solved numerically
   using scipy.integrate.solve_ivp (initial value problem), using the RK45 method.  Just run odesolver.py and the graphs
   will be generated including the max velocity and height.  A parachute opening on descent is not included in the simulation.
