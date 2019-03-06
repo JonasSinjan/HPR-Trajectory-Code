@@ -30,9 +30,8 @@ m_init = 4.6  # kg
 
 # initial conditions
 z0 = [0, 0, 4.6]
+t_end = 0.495/0.1915
+t = np.linspace(0, t_end , 1000)
 
-t = np.linspace(0, 1000, 1000)
+sol = spi.solve_ivp(model, (0, t_end), z0, t_eval = t, max_step = 0.001)
 
-sol = spi.solve_ivp(model, (0, 1), z0)
-
-print(sol.z)
