@@ -2,13 +2,6 @@ import numpy as np
 import scipy.integrate as spi
 import matplotlib.pyplot as plt
 
-rho = 1.22  # kg/m^3
-A = 2.552 * 10 ** -3  # m^2 frontal area
-Cd = 0.75  # air drag coefficient
-g = 9.8  # m/s^2
-k = 0.5 * rho * Cd * A  # drag resistance factor
-
-
 def stage1(t, z):
     rho = 1.22
     A = 2.552 * 10 ** -3
@@ -47,30 +40,28 @@ def coast(t, z):
     rho = 1.22
     A = 2.552 * 10 ** -3
     C_d = 0.75
-    mdot = 0.1915  # kg/s - mass flow rate
-    u_e = 1947.8  # m/s
 
     h = z[0]  # initial values
     v = z[1]
     m = z[2]
 
     dhdt = v
-    dvdt = - 9.81
+    dvdt = - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m
     dmdt = 0
     return [dhdt, dvdt, dmdt]
 
 
-m_init = 4.6  # kg
+m_init = 4.2 # initial fully loaded mass in kg
 
 # 1st burn
-z0 = [0, 0, 4.6]
+z0 = [0, 0, m_init]  # setting initial conditions [height, velocity, mass]
 t_end = 0.2472 / 0.2225
 t = np.linspace(0, t_end, 1000)
 sol = spi.solve_ivp(stage1, (0, t_end), z0, t_eval=t, max_step=0.001)
 
 # Coast for 1 second
 z1 = [sol.y[0, -1], sol.y[1, -1], sol.y[2, -1]]
-ct = t_end + 1
+ct = t_end + 0.5
 t2 = np.linspace(t_end, ct, 1000)
 sol2 = spi.solve_ivp(coast, (t_end, ct), z1, t_eval=t2, max_step=0.001)
 
