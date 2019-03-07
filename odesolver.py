@@ -104,6 +104,13 @@ print(f"The Max velocity is {max(velocity)} m/s")
 
 mass = np.concatenate((sol.y[2, :], sol2.y[2, :], sol3.y[2, :], sol4.y[2, :]))
 
+boost_1 =[accel(i,j)  for i in sol.y[2, :] and j in sol.y[1, :]]
+coast_1 = [accel(i,j)  for i in sol2.y[2, :] and j in sol2.y[1, :]]
+boost_2 = [accel(i,j)  for i in sol3.y[2, :] and j in sol3.y[1, :]]
+coast_2 = [accel(i,j)  for i in sol4.y[2, :] and j in sol4.y[1, :]]
+
+accel = np.concatenate((boost_1, coast_1, boost_2, coast_2))
+
 plt.figure(0)
 plt.plot(time, height, label='Height')
 plt.xlabel('Time (seconds)')
@@ -122,3 +129,11 @@ plt.xlabel('Time (seconds)')
 plt.ylabel('Mass (kg)')
 plt.legend()
 plt.show()
+
+plt.figure(3)
+plt.plot(time, accel, label='Acceleration')
+plt.xlabel('Time (seconds)')
+plt.ylabel('Acceleration (m/s^2)')
+plt.legend()
+plt.show()
+
