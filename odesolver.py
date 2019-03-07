@@ -2,6 +2,7 @@ import numpy as np
 import scipy.integrate as spi
 import matplotlib.pyplot as plt
 
+
 def stage1(t, z):
     rho = 1.22
     A = 2.552 * 10 ** -3
@@ -50,25 +51,27 @@ def coast(t, z):
     dmdt = 0
     return [dhdt, dvdt, dmdt]
 
-def accel(m,v, phase):
+
+def accel(m, v, phase):
     rho = 1.22
     A = 2.552 * 10 ** -3
     C_d = 0.75
 
-    if phase == 0: #lower stage burn
+    if phase == 0:  # lower stage burn
         mdot = 0.2225  # kg/s - mass flow rate
         u_e = 2175
         return - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m + (mdot * u_e) / m
 
-    if phase == 1: #coasting
+    if phase == 1:  # coasting
         return - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m
 
-    if phase == 2: #upper stage
+    if phase == 2:  # upper stage
         mdot = 0.1915  # kg/s - mass flow rate
         u_e = 1947.8
         return - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m + (mdot * u_e) / m
 
-m_init = 4.2 # initial fully loaded mass in kg
+
+m_init = 4.2  # initial fully loaded mass in kg
 
 # 1st burn
 z0 = [0, 0, m_init]  # setting initial conditions [height, velocity, mass]
@@ -104,10 +107,38 @@ print(f"The Max velocity is {max(velocity)} m/s")
 
 mass = np.concatenate((sol.y[2, :], sol2.y[2, :], sol3.y[2, :], sol4.y[2, :]))
 
-boost_1 =[accel(i,j)  for i in sol.y[2, :] and j in sol.y[1, :]]
-coast_1 = [accel(i,j)  for i in sol2.y[2, :] and j in sol2.y[1, :]]
-boost_2 = [accel(i,j)  for i in sol3.y[2, :] and j in sol3.y[1, :]]
-coast_2 = [accel(i,j)  for i in sol4.y[2, :] and j in sol4.y[1, :]]
+boost_1 = [0]*1000
+for i in range(1000):
+    m = sol.y[2,i]
+    for j in range(1000):
+        v = sol.y[1,i]
+        boost_1[i] = accel(m,v,0)
+        break
+
+coast_1 = [0]*1000
+for i in range(1000):
+    m = sol2.y[2,i]
+    for j in range(1000):
+        v = sol2.y[1,i]
+        boost_1[i] = accel(m,v,1)
+        break
+
+boost_2 = [0]*1000
+for i in range(1000):
+    m = sol3.y[2,i]
+    for j in range(1000):
+        v = sol3.y[1,i]
+        boost_1[i] = accel(m,v,2)
+        break
+
+coast_2 = [0]*1000
+for i in range(1000):
+    m = sol4.y[2,i]
+    for j in range(1000):
+        v = sol4.y[1,i]
+        boost_1[i] = accel(m,v,1)
+        break
+
 
 accel = np.concatenate((boost_1, coast_1, boost_2, coast_2))
 
@@ -136,4 +167,3 @@ plt.xlabel('Time (seconds)')
 plt.ylabel('Acceleration (m/s^2)')
 plt.legend()
 plt.show()
-
