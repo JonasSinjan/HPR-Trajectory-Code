@@ -50,6 +50,23 @@ def coast(t, z):
     dmdt = 0
     return [dhdt, dvdt, dmdt]
 
+def accel(m,v, phase):
+    rho = 1.22
+    A = 2.552 * 10 ** -3
+    C_d = 0.75
+
+    if phase == 0: #lower stage burn
+        mdot = 0.2225  # kg/s - mass flow rate
+        u_e = 2175
+        return - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m + (mdot * u_e) / m
+
+    if phase == 1: #coasting
+        return - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m
+
+    if phase == 2: #upper stage
+        mdot = 0.1915  # kg/s - mass flow rate
+        u_e = 1947.8
+        return - 9.81 - (0.5 * rho * v ** 2) * C_d * A / m + (mdot * u_e) / m
 
 m_init = 4.2 # initial fully loaded mass in kg
 
