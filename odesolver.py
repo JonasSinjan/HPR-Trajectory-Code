@@ -107,40 +107,41 @@ print(f"The Max velocity is {max(velocity)} m/s")
 
 mass = np.concatenate((sol.y[2, :], sol2.y[2, :], sol3.y[2, :], sol4.y[2, :]))
 
-boost_1 = [0]*num
+boost_1 = [0] * num
 for i in range(num):
-    m = sol.y[2,i]
+    m = sol.y[2, i]
     for j in range(num):
-        v = sol.y[1,i]
-        boost_1[i] = accel(m,v,0)
+        v = sol.y[1, i]
+        boost_1[i] = accel(m, v, 0)
         break
 
-coast_1 = [0]*num
+coast_1 = [0] * num
 for i in range(num):
-    m = sol2.y[2,i]
+    m = sol2.y[2, i]
     for j in range(num):
-        v = sol2.y[1,i]
-        coast_1[i] = accel(m,v,1)
+        v = sol2.y[1, i]
+        coast_1[i] = accel(m, v, 1)
         break
 
-boost_2 = [0]*num
+boost_2 = [0] * num
 for i in range(num):
-    m = sol3.y[2,i]
+    m = sol3.y[2, i]
     for j in range(num):
-        v = sol3.y[1,i]
-        boost_2[i] = accel(m,v,2)
+        v = sol3.y[1, i]
+        boost_2[i] = accel(m, v, 2)
         break
 
-coast_2 = [0]*num
+coast_2 = [0] * num
 for i in range(num):
-    m = sol4.y[2,i]
+    m = sol4.y[2, i]
     for j in range(num):
-        v = sol4.y[1,i]
-        coast_2[i] = accel(m,v,1)
+        v = sol4.y[1, i]
+        coast_2[i] = accel(m, v, 1)
         break
-
 
 accel = np.concatenate((boost_1, coast_1, boost_2, coast_2))
+
+grad = np.gradient(velocity, time)  # should get same results, this is a 2nd order central diff scheme
 
 plt.figure(0)
 plt.plot(time, height, label='Height')
@@ -163,6 +164,7 @@ plt.show()
 
 plt.figure(3)
 plt.plot(time, accel, label='Acceleration')
+plt.plot(time, grad, 'r*', label='Gradient')  # verification
 plt.xlabel('Time (seconds)')
 plt.ylabel('Acceleration (m/s^2)')
 plt.legend()
