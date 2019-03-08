@@ -139,9 +139,9 @@ for i in range(num):
         coast_2[i] = accel(m, v, 1)
         break
 
-accel = np.concatenate((boost_1, coast_1, boost_2, coast_2))
+accel = np.concatenate((boost_1, coast_1, boost_2, coast_2))/9.81
 
-grad = np.gradient(velocity, time)  # should get same results, this is a 2nd order central diff scheme
+grad = np.gradient(velocity, time) /9.81 # should get same results, this is a 2nd order central diff scheme
 
 plt.figure(0)
 plt.plot(time, height, label='Height')
@@ -166,6 +166,6 @@ plt.figure(3)
 plt.plot(time, accel, label='Acceleration')
 plt.plot(time, grad, 'r*', label='Gradient')  # verification
 plt.xlabel('Time (seconds)')
-plt.ylabel('Acceleration (m/s^2)')
+plt.ylabel('Acceleration in Gs (m/s^2)')
 plt.legend()
 plt.show()
