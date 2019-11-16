@@ -4,7 +4,7 @@
 
   The system: a two-stage rocket, using the motors described at the bottom, for only vertical flight.
   The governing set of ordinary differential equations, taking into account a v^2 drag and gravity, are solved numerically
-  using scipy.integrate.solve_ivp (initial value problem), using the RK45 method.  Just run odesolver.py and the graphs
+  using scipy.integrate.solve_ivp (initial value problem), using the RK45 method.  Run odesolver.py and the graphs
   will be generated including the velocity, height, mass and acceleration against time.  A parachute opening on descent is not included in the simulation.
 
 
@@ -31,7 +31,7 @@
    2nd stage motor: CESARONI - P38-5G BLUE STREAK (J357).
    Link: https://www.apogeerockets.com/Rocket_Motors/Cesaroni_Propellant_Kits/38mm_Motors/5-Grain_Motors/Cesaroni_P38-5G_Blue_Streak_J357
    
-   Once all data filled in, just run: data_run.py.
+   Once all data filled in, run: data_run.py.
    
   
    
